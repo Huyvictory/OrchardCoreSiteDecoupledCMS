@@ -1,4 +1,5 @@
 ﻿@page "/blogpost/{slug}"
+@using System.Web
 @inject OrchardCore.IOrchardHelper Orchard
 
 @{
@@ -6,13 +7,17 @@
 }
 
 <h1>This is the blog post: @blogPost?.DisplayText</h1>
-<p>TitlePart: @blogPost?.Content.TitlePart.Title</p>
+<p class="font-">TitlePart: @blogPost?.Content.TitlePart.Title</p>
 <p>MarkdownBodyPart: @await Orchard.MarkdownToHtmlAsync((string)blogPost?.Content.MarkdownBodyPart.Markdown)</p>
+
+@Html.Raw(blogPost?.Content.Theblogposttest.TheblogposttestHTMLField.Html)
+
+<img class="d-flex w-100 h-100" alt="@blogPost.Content.Theblogposttest.mediafield.MediaTexts[0]" src="@Orchard.AssetUrl((string)blogPost?.Content.Theblogposttest.mediafield.Paths[0], null, null, OrchardCore.Media.Processing.ResizeMode.Min)" />
 
 @Orchard.ConsoleLog(blogPost)
 
 @functions
 {
-    [FromRoute]
-    public string Slug { get; set; }
+[FromRoute]
+public string Slug { get; set; }
 }

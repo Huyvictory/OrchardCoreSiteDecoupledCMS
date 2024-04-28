@@ -1,0 +1,21 @@
+﻿@page "/fieldtest/{contentItemId}"
+
+@inject OrchardCore.IOrchardHelper Orchard
+
+@{
+    var FieldTestsContentItem = await Orchard.GetContentItemByIdAsync($"{contentItemId}");
+}
+
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@Orchard.ConsoleLog(FieldTestsContentItem)
+
+@functions {
+    [FromRoute]
+    public string contentItemId { get; set; }
+}
